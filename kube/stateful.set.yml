@@ -3,7 +3,7 @@ kind: StatefulSet
 metadata:
   name: {{APP_NAME}}
 spec:
-  serviceName: {{APP_NAME}}
+  serviceName: {{SVC_NAME}}
   replicas: {{REPLICAS}}
   template:
     metadata:
@@ -37,4 +37,4 @@ spec:
               fieldRef:
                 fieldPath: metadata.name
           - name: RABBITMQ_NODENAME
-            value: rabbit@$(NODE_NAME).{{APP_NAME}}
+            value: rabbit@$(NODE_NAME).{{SVC_NAME}}

@@ -5,7 +5,7 @@ metadata:
   labels:
     app: {{APP_NAME}}
 spec:
-  type: ClusterIP
+  clusterIP: None
   selector:
     app: {{APP_NAME}}
   ports:
@@ -17,4 +17,3 @@ spec:
       port: 4369
     - name: dist-port
       port: 25672
-      

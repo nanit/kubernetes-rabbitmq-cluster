@@ -37,4 +37,4 @@ spec:
               fieldRef:
                 fieldPath: metadata.name
           - name: RABBITMQ_NODENAME
-            value: rabbitmq@$(NODE_NAME).{{APP_NAME}}
+            value: rabbit@$(NODE_NAME).{{APP_NAME}}

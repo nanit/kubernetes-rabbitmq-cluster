@@ -52,7 +52,7 @@ allConfigKeys=(
 	"${managementConfigKeys[@]/#/management_}"
 	"${rabbitConfigKeys[@]}"
 	"${sslConfigKeys[@]/#/ssl_}"
-  "${clusterer_nodes[@]}"
+  "${clustererConfigKeys[@]}"
 )
 
 declare -A configDefaults=(

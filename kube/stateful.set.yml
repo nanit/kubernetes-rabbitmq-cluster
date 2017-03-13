@@ -3,7 +3,7 @@ kind: StatefulSet
 metadata:
   name: {{APP_NAME}}
 spec:
-  serviceName: {{APP_NAME}}
+  serviceName: {{SVC_NAME}}
   replicas: {{REPLICAS}}
   template:
     metadata:
@@ -25,9 +25,9 @@ spec:
             containerPort: 25672
         env: 
           - name: RABBITMQ_DEFAULT_USER
-            value: {{RABBITMQ_USER}}
+            value: {{RABBITMQ_DEFAULT_USER}}
           - name: RABBITMQ_DEFAULT_PASS
-            value: {{RABBITMQ_PASSWORD}}
+            value: {{RABBITMQ_DEFAULT_PASS}}
           - name: RABBITMQ_ERLANG_COOKIE
             value: {{RABBITMQ_ERLANG_COOKIE}}
           - name: RABBITMQ_USE_LONGNAME
@@ -37,4 +37,4 @@ spec:
               fieldRef:
                 fieldPath: metadata.name
           - name: RABBITMQ_NODENAME
-            value: rabbit@$(NODE_NAME).{{APP_NAME}}
+            value: rabbit@$(NODE_NAME).{{SVC_NAME}}

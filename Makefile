@@ -1,3 +1,4 @@
+.PHONY: deploy
 DOCKER_REPOSITORY?=nanit
 SUDO?=sudo
 

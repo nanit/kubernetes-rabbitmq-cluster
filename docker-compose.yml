@@ -1,0 +1,43 @@
+version: "2"
+services:
+  rabbitmq.first:
+    hostname: rabbitmq.first
+    build: docker
+    environment:
+      RABBITMQ_ERLANG_COOKIE: "AAAA"      
+      RABBITMQ_USE_LONGNAME: "true"
+      RABBITMQ_NODENAME: "rabbit@rabbitmq.first"
+    networks:
+      main:
+        aliases:
+          - rabbitmq.first
+    ports:
+      - "15672:15672"
+  rabbitmq.second:
+    hostname: rabbitmq.second
+    build: docker
+    environment:
+      RABBITMQ_ERLANG_COOKIE: "AAAA"      
+      RABBITMQ_USE_LONGNAME: "true"
+      RABBITMQ_NODENAME: "rabbit@rabbitmq.second"
+    networks:
+      main:
+        aliases:
+          - rabbitmq.second
+    ports:
+      - "15673:15672"
+  rabbitmq.third:
+    hostname: rabbitmq.third
+    build: docker
+    environment:
+      RABBITMQ_ERLANG_COOKIE: "AAAA"      
+      RABBITMQ_USE_LONGNAME: "true"
+      RABBITMQ_NODENAME: "rabbit@rabbitmq.third"
+    networks:
+      main:
+        aliases:
+          - rabbitmq.third
+    ports:
+      - "15674:15672"
+networks:
+  main:

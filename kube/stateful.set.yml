@@ -1,0 +1,35 @@
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: {{APP_NAME}}
+spec:
+  serviceName: {{APP_NAME}}
+  replicas: {{REPLICAS}}
+  template:
+    metadata:
+      labels:
+        app: {{APP_NAME}}
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: {{APP_NAME}}
+        image: {{IMAGE_NAME}}
+        ports:
+          - name: queue-port
+            containerPort: 5672
+          - name: management-port
+            containerPort: 15672
+          - name: cluster-port
+            containerPort: 4369
+          - name: dist-port
+            containerPort: 25672
+        env: 
+          - name: RABBITMQ_DEFAULT_USER
+            value: {{RABBITMQ_USER}}
+          - name: RABBITMQ_DEFAULT_PASS
+            value: {{RABBITMQ_PASSWORD}}
+          - name: RABBITMQ_ERLANG_COOKIE
+            value: {{RABBITMQ_ERLANG_COOKIE}}
+          - name: RABBITMQ_USE_LONGNAME
+            value: true
+

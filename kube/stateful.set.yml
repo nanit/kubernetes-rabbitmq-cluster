@@ -32,4 +32,10 @@ spec:
             value: {{RABBITMQ_ERLANG_COOKIE}}
           - name: RABBITMQ_USE_LONGNAME
             value: "true"
-
+            apiVersion: v1
+          - name: MY_NODE_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
+          - name: EREZ
+            value: rabbitmq@$(MY_NODE_NAME).rabbitmq

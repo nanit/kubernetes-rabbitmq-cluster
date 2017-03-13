@@ -5,6 +5,7 @@ metadata:
   labels:
     app: {{APP_NAME}}
 spec:
+  clusterIP: None
   selector:
     app: {{APP_NAME}}
   ports:

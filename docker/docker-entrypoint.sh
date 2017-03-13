@@ -44,10 +44,15 @@ fileConfigKeys=(
 	ssl_certfile
 	ssl_keyfile
 )
+clustererConfigKeys=(
+  clusterer_nodes
+  clusterer_gospel_node
+)
 allConfigKeys=(
 	"${managementConfigKeys[@]/#/management_}"
 	"${rabbitConfigKeys[@]}"
 	"${sslConfigKeys[@]/#/ssl_}"
+  "${clusterer_nodes[@]}"
 )
 
 declare -A configDefaults=(

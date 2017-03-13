@@ -31,5 +31,5 @@ spec:
           - name: RABBITMQ_ERLANG_COOKIE
             value: {{RABBITMQ_ERLANG_COOKIE}}
           - name: RABBITMQ_USE_LONGNAME
-            value: true
+            value: "true"
 

@@ -1,8 +1,8 @@
 #!/bin/bash
 
-RABBITMQ_REPLICAS=3 && \
-  RABBITMQ_USER=aaa && \
-  RABBITMQ_PASSWORD=bbb && \
-  RABBITMQ_ERLANG_COOKIE="secret" && \
-  SUDO="" && \
+export RABBITMQ_REPLICAS=3 && \
+  export RABBITMQ_USER=aaa && \
+  export RABBITMQ_PASSWORD=bbb && \
+  export RABBITMQ_ERLANG_COOKIE="secret" && \
+  export SUDO="" && \
   make deploy

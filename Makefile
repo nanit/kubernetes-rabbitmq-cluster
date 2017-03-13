@@ -19,7 +19,7 @@ define generate-rabbitmq-stateful-set
 	if [ -z "$(RABBITMQ_USER)" ]; then echo "ERROR: RABBITMQ_USER is empty!"; exit 1; fi
 	if [ -z "$(RABBITMQ_PASSWORD)" ]; then echo "ERROR: RABBITMQ_PASSWORD is empty!"; exit 1; fi
 	if [ -z "$(RABBITMQ_ERLANG_COOKIE)" ]; then echo "ERROR: RABBITMQ_ERLANG_COOKIE is empty!"; exit 1; fi
-	sed -e 's/{{APP_NAME}}/$(RABBITMQ_APP_NAME)/g;s,{{IMAGE_NAME}},$(RABBITMQ_IMAGE_NAME),g;s/{{REPLICAS}}/$(RABBITMQ_REPLICAS)/g;s/{{RABBITMQ_USER}}/$(RABBITMQ_USER)/g;s/{{RABBITMQ_PASSWORD}}/$(RABBITMQ_PASSWORD)/g;s/{{RABBITMQ_ERLANG_COOKIE}}/$(RABBITMQ_ERLANG_COOKIE)/s' kube/stateful.set.yml
+	sed -e 's/{{APP_NAME}}/$(RABBITMQ_APP_NAME)/g;s,{{IMAGE_NAME}},$(RABBITMQ_IMAGE_NAME),g;s/{{REPLICAS}}/$(RABBITMQ_REPLICAS)/g;s/{{RABBITMQ_USER}}/$(RABBITMQ_USER)/g;s/{{RABBITMQ_PASSWORD}}/$(RABBITMQ_PASSWORD)/g;s/{{RABBITMQ_ERLANG_COOKIE}}/$(RABBITMQ_ERLANG_COOKIE)/g' kube/stateful.set.yml
 endef
 
 deploy-rabbitmq: docker-rabbitmq

@@ -7,7 +7,7 @@ RUN rabbitmq-plugins enable rabbitmq_clusterer --offline
 
 ENV RABBITMQ_BOOT_MODULE rabbit_clusterer
 ENV RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS "-pa /plugins/rabbitmq_clusterer-1.0.3.ez/rabbitmq_clusterer-1.0.3/ebin"
+ADD clusterer.config /etc/rabbitmq/
 
-ADD rabbitmq.config /etc/rabbitmq/
 RUN chown -R rabbitmq:rabbitmq /var/lib/rabbitmq /etc/rabbitmq
 COPY docker-entrypoint.sh /usr/local/bin/

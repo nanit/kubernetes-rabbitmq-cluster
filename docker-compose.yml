@@ -1,42 +1,48 @@
 version: "2"
 services:
-  rabbitmq.first:
-    hostname: rabbitmq.first
+  rabbitmq-0.rabbitmq:
+    hostname: rabbitmq-0.rabbitmq
     build: docker
     environment:
       RABBITMQ_ERLANG_COOKIE: "AAAA"      
       RABBITMQ_USE_LONGNAME: "true"
-      RABBITMQ_NODENAME: "rabbit@rabbitmq.first"
+      RABBITMQ_NODENAME: "rabbit@rabbitmq-0.rabbitmq"
+      RABBITMQ_DEFAULT_USER: "user"
+      RABBITMQ_DEFAULT_PASS: "password"
     networks:
       main:
         aliases:
-          - rabbitmq.first
+          - rabbitmq-0.rabbitmq
     ports:
       - "15672:15672"
-  rabbitmq.second:
-    hostname: rabbitmq.second
+  rabbitmq-1.rabbitmq:
+    hostname: rabbitmq-1.rabbitmq
     build: docker
     environment:
       RABBITMQ_ERLANG_COOKIE: "AAAA"      
       RABBITMQ_USE_LONGNAME: "true"
-      RABBITMQ_NODENAME: "rabbit@rabbitmq.second"
+      RABBITMQ_NODENAME: "rabbit@rabbitmq-1.rabbitmq"
+      RABBITMQ_DEFAULT_USER: "user"
+      RABBITMQ_DEFAULT_PASS: "password"
     networks:
       main:
         aliases:
-          - rabbitmq.second
+          - rabbitmq-1.rabbitmq
     ports:
       - "15673:15672"
-  rabbitmq.third:
-    hostname: rabbitmq.third
+  rabbitmq-2.rabbitmq:
+    hostname: rabbitmq-2.rabbitmq
     build: docker
     environment:
       RABBITMQ_ERLANG_COOKIE: "AAAA"      
       RABBITMQ_USE_LONGNAME: "true"
-      RABBITMQ_NODENAME: "rabbit@rabbitmq.third"
+      RABBITMQ_NODENAME: "rabbit@rabbitmq-2.rabbitmq"
+      RABBITMQ_DEFAULT_USER: "user"
+      RABBITMQ_DEFAULT_PASS: "password"
     networks:
       main:
         aliases:
-          - rabbitmq.third
+          - rabbitmq-2.rabbitmq
     ports:
       - "15674:15672"
 networks:

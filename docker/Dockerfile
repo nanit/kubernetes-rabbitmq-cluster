@@ -10,3 +10,4 @@ ENV RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS "-pa /plugins/rabbitmq_clusterer-1.0.3.e
 
 ADD rabbitmq.config /etc/rabbitmq/
 RUN chown -R rabbitmq:rabbitmq /var/lib/rabbitmq /etc/rabbitmq
+COPY docker-entrypoint.sh /usr/local/bin/

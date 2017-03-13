@@ -9,14 +9,15 @@ A ready to deploy rabbitmq cluster to work on top of Kubernetes.
 4. Optional - Access to your own docker repository to store your own images. That's relevant if you don't want to use the default images offered here.
 
 ## Environment Variables:
-| Name                     | Default Value | Purpose                                                                  | Can be changed? |
-|--------------------------|---------------|--------------------------------------------------------------------------|-----------------|
-| DOCKER_REPOSITORY        | nanit         | Change it if you want to build and use custom docker repository          | Yes             |
-| SUDO                     | sudo          | Should docker commands be prefixed with sudo. Change to "" to omit sudo. | Yes             |
-| RABBITMQ_REPLICAS        | 3             | Number of nodes in the cluster                                           | No              |
-| RABBITMQ_DEFAULT_USER    | None          | The default username to access the management console                    | Yes             |
-| RABBITMQ_DEFAULT_PASS    | None          | The default password to access the management console                    | Yes             |
-| RABBITMQ_ERLANG_COOKIE   | None          | Erlang secret needed for nodes communication                             | Yes             |
+| Name                         | Default Value | Purpose                                                                  | Can be changed? |
+|------------------------------|---------------|--------------------------------------------------------------------------|-----------------|
+| DOCKER_REPOSITORY            | nanit         | Change it if you want to build and use custom docker repository          | Yes             |
+| SUDO                         | sudo          | Should docker commands be prefixed with sudo. Change to "" to omit sudo. | Yes             |
+| RABBITMQ_REPLICAS            | 3             | Number of nodes in the cluster                                           | No              |
+| RABBITMQ_DEFAULT_USER        | None          | The default username to access the management console                    | Yes             |
+| RABBITMQ_DEFAULT_PASS        | None          | The default password to access the management console                    | Yes             |
+| RABBITMQ_ERLANG_COOKIE       | None          | Erlang secret needed for nodes communication                             | Yes             |
+| RABBITMQ_EXPOSE_MANAGEMENT   | FALSE         | Should RMQ management console be exposed outside                         | Yes             |
 
 ## Deployment:
 1. Clone this repository
@@ -27,10 +28,12 @@ export RABBITMQ_REPLICAS=3 && \
 export RABBITMQ_DEFAULT_USER=username && \
 export RABBITMQ_DEFAULT_PASS=password && \
 export RABBITMQ_ERLANG_COOKIE=secret && \
+export RABBITMQ_EXPOSE_MANAGEMENT=TRUE && \
 export SUDO="" && \
 make deploy
 ```
 ## Usage:
+At the end of the installation you should have a rabbitmq service which you can use to connect to the cluster
 
 
 ## Verifying The Deployment:

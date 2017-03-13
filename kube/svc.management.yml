@@ -1,0 +1,11 @@
+kind: "Service"
+apiVersion: v1
+metadata:
+  name: {{SVC_NAME}}
+spec:
+  type: LoadBalancer
+  selector:
+    app: {{APP_NAME}}
+  ports:
+    - name: management-console
+      port: 15672

@@ -11,8 +11,6 @@ spec:
   ports:
     - name: queue-port
       port: 5672
-    - name: management-port
-      port: 15672
     - name: cluster-port
       port: 4369
     - name: dist-port

@@ -36,13 +36,16 @@ make deploy
 At the end of the installation you should have a rabbitmq service which you can use to connect to the cluster
 
 
-## Verifying The Deployment:
-
-
-
 ## Building your own images
 If you want to build use your own images make sure to change the DOCKER_REPOSITORY environment variable to your own docker repository.
 It will build the images, push them to your docker repository and use them to create all the needed kubernetes deployments.
+
+# Docker Compose
+You can run the same setup in docker-compose using
+```
+$ docker-compose build && docker-compose up
+```
+Then, go to `localhost:15672` and you'll see the cluster is already formed up.
 
 ## Future work
 1. Allow setting a different number of replicas

@@ -1,48 +1,48 @@
 version: "2"
 services:
-  rabbitmq-0.rabbitmq:
-    hostname: rabbitmq-0.rabbitmq
+  rabbitmq-0.rmq-cluster:
+    hostname: rabbitmq-0.rmq-cluster
     build: docker
     environment:
       RABBITMQ_ERLANG_COOKIE: "AAAA"      
       RABBITMQ_USE_LONGNAME: "true"
-      RABBITMQ_NODENAME: "rabbit@rabbitmq-0.rabbitmq"
+      RABBITMQ_NODENAME: "rabbit@rabbitmq-0.rmq-cluster"
       RABBITMQ_DEFAULT_USER: "user"
       RABBITMQ_DEFAULT_PASS: "password"
     networks:
       main:
         aliases:
-          - rabbitmq-0.rabbitmq
+          - rabbitmq-0.rmq-cluster
     ports:
       - "15672:15672"
-  rabbitmq-1.rabbitmq:
-    hostname: rabbitmq-1.rabbitmq
+  rabbitmq-1.rmq-cluster:
+    hostname: rabbitmq-1.rmq-cluster
     build: docker
     environment:
       RABBITMQ_ERLANG_COOKIE: "AAAA"      
       RABBITMQ_USE_LONGNAME: "true"
-      RABBITMQ_NODENAME: "rabbit@rabbitmq-1.rabbitmq"
+      RABBITMQ_NODENAME: "rabbit@rabbitmq-1.rmq-cluster"
       RABBITMQ_DEFAULT_USER: "user"
       RABBITMQ_DEFAULT_PASS: "password"
     networks:
       main:
         aliases:
-          - rabbitmq-1.rabbitmq
+          - rabbitmq-1.rmq-cluster
     ports:
       - "15673:15672"
-  rabbitmq-2.rabbitmq:
-    hostname: rabbitmq-2.rabbitmq
+  rabbitmq-2.rmq-cluster:
+    hostname: rabbitmq-2.rmq-cluster
     build: docker
     environment:
       RABBITMQ_ERLANG_COOKIE: "AAAA"      
       RABBITMQ_USE_LONGNAME: "true"
-      RABBITMQ_NODENAME: "rabbit@rabbitmq-2.rabbitmq"
+      RABBITMQ_NODENAME: "rabbit@rabbitmq-2.rmq-cluster"
       RABBITMQ_DEFAULT_USER: "user"
       RABBITMQ_DEFAULT_PASS: "password"
     networks:
       main:
         aliases:
-          - rabbitmq-2.rabbitmq
+          - rabbitmq-2.rmq-cluster
     ports:
       - "15674:15672"
 networks:

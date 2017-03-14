@@ -1,12 +1,20 @@
 # kubernetes-rabbitmq-cluster
 
 A ready to deploy rabbitmq cluster to work on top of Kubernetes.
+It uses [rabbitmq clusterer plugin](https://github.com/rabbitmq/rabbitmq-clusterer) to achieve clustering.
 
 ## Requirements:
 1. Kubernetes version 1.5.X (We're using StatefulSet)
 2. kubectl configured to work with your Kubernetes API
 3. Tested on Kubernetes 1.5.2 on top of AWS (See future work)
 4. Optional - Access to your own docker repository to store your own images. That's relevant if you don't want to use the default images offered here.
+
+## Contents:
+
+1. A 3 nodes rabbitmq cluster as StatefulSet
+2. A rmq-cluster headless service to control the StatefulSet domain
+3. a rabbitmq service to access the cluster
+4. An optional, rabbitmq-management service to access the admin control panel
 
 ## Environment Variables:
 | Name                         | Default Value | Purpose                                                                  | Can be changed? |
@@ -34,7 +42,6 @@ make deploy
 ```
 ## Usage:
 At the end of the installation you should have a rabbitmq service which you can use to connect to the cluster
-
 
 ## Building your own images
 If you want to build use your own images make sure to change the DOCKER_REPOSITORY environment variable to your own docker repository.

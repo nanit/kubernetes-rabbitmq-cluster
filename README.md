@@ -46,7 +46,7 @@ make deploy
 
 ## Usage:
 
-At the end of the installation you should have a rabbitmq service which you can use to connect to the cluster
+At the end of the installation you should have a service named `rabbitmq` which you can use to connect to the cluster
 
 ## Changing the number of nodes:
 

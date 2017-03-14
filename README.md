@@ -1,6 +1,7 @@
 # kubernetes-rabbitmq-cluster
 
 A ready to deploy rabbitmq cluster to work on top of Kubernetes.
+
 It uses [rabbitmq clusterer plugin](https://github.com/rabbitmq/rabbitmq-clusterer) to achieve clustering.
 
 ## Requirements:

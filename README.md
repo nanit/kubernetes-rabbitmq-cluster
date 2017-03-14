@@ -29,8 +29,10 @@ It uses [rabbitmq clusterer plugin](https://github.com/rabbitmq/rabbitmq-cluster
 | RABBITMQ_EXPOSE_MANAGEMENT   | FALSE         | Should RMQ management console be exposed outside                         | Yes             |
 
 ## Deployment:
+
 1. Clone this repository
 2. Run:
+
 ```
 export DOCKER_REPOSITORY=nanit && \
 export RABBITMQ_REPLICAS=3 && \
@@ -41,10 +43,12 @@ export RABBITMQ_EXPOSE_MANAGEMENT=TRUE && \
 export SUDO="" && \
 make deploy
 ```
+
 ## Usage:
+
 At the end of the installation you should have a rabbitmq service which you can use to connect to the cluster
 
-## Changing the number of nodes
+## Changing the number of nodes:
 
 If you'd like to have more than 3 nodes in the cluster you have to:
 
@@ -53,17 +57,17 @@ If you'd like to have more than 3 nodes in the cluster you have to:
 3. Change the `RABBITMQ_REPLICAS` to the new number of nodes
 4. Run the deployment script above
 
-## Building your own images
+## Building your own images:
 If you want to build use your own images make sure to change the DOCKER_REPOSITORY environment variable to your own docker repository.
 It will build the images, push them to your docker repository and use them to create all the needed kubernetes deployments.
 
-# Docker Compose
+## Docker Compose:
 You can run the same setup in docker-compose using
 ```
 $ docker-compose build && docker-compose up
 ```
 Then, go to `localhost:15672` and you'll see the cluster is already formed up.
 
-## Future work
+## Future work:
 1. Allow setting a different number of replicas
 

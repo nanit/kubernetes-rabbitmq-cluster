@@ -44,6 +44,15 @@ make deploy
 ## Usage:
 At the end of the installation you should have a rabbitmq service which you can use to connect to the cluster
 
+## Changing the number of nodes
+
+If you'd like to have more than 3 nodes in the cluster you have to:
+
+1. Change the [clusterer.config](https://github.com/nanit/kubernetes-rabbitmq-cluster/blob/master/docker/clusterer.config) to include all the cluster nodes.
+2. Build your own image by setting the `DOCKER_RESPOSITORY` environment variable
+3. Change the `RABBITMQ_REPLICAS` to the new number of nodes
+4. Run the deployment script above
+
 ## Building your own images
 If you want to build use your own images make sure to change the DOCKER_REPOSITORY environment variable to your own docker repository.
 It will build the images, push them to your docker repository and use them to create all the needed kubernetes deployments.

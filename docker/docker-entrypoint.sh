@@ -299,4 +299,6 @@ if [ "$haveSslConfig" ] && [ -f "$combinedSsl" ]; then
 	export RABBITMQ_CTL_ERL_ARGS="$RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS"
 fi
 
+rabbitmqctl set_policy ha-all ".*" '{"ha-mode":"all"}' --apply-to queues
+
 exec "$@"

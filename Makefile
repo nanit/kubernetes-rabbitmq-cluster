@@ -14,7 +14,7 @@ RABBITMQ_DEFAULT_USER?=$(shell curl -s config/$(NANIT_ENV)/$(RABBITMQ_APP_NAME)/
 RABBITMQ_DEFAULT_PASS?=$(shell curl -s config/$(NANIT_ENV)/$(RABBITMQ_APP_NAME)/password)
 RABBITMQ_ERLANG_COOKIE?=$(shell curl -s config/$(NANIT_ENV)/$(RABBITMQ_APP_NAME)/erlang_cookie)
 RABBITMQ_EXPOSE_MANAGEMENT?=$(shell curl -s config/$(NANIT_ENV)/$(RABBITMQ_APP_NAME)/expose_management)
-RABBITMQ_SET_HA_POLICY=TRUE
+RABBITMQ_HA_POLICY?=$(shell curl -s config/$(NANIT_ENV)/$(RABBITMQ_APP_NAME)/ha_policy)
 
 define generate-rabbitmq-headless-svc
 	sed -e 's/{{APP_NAME}}/$(RABBITMQ_APP_NAME)/g;s/{{SVC_NAME}}/$(RABBITMQ_HEADLESS_SERVICE_NAME)/g' kube/svc.headless.yml
@@ -37,7 +37,7 @@ define generate-rabbitmq-stateful-set
 endef
 
 define set-ha-policy-on-rabbitmq-cluster
-	if [ "$(RABBITMQ_SET_HA_POLICY)" = "TRUE" ]; then ./set_ha.sh ;fi
+	if [ "$(RABBITMQ_HA_POLICY)" != "" ]; then ./set_ha.sh ;fi
 endef
 
 deploy-rabbitmq: docker-rabbitmq

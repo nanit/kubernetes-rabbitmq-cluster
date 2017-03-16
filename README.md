@@ -18,15 +18,16 @@ It uses [rabbitmq clusterer plugin](https://github.com/rabbitmq/rabbitmq-cluster
 4. An optional, rabbitmq-management service to access the admin control panel
 
 ## Environment Variables:
-| Name                         | Default Value | Purpose                                                                  | Can be changed? |
-|------------------------------|---------------|--------------------------------------------------------------------------|-----------------|
-| DOCKER_REPOSITORY            | nanit         | Change it if you want to build and use custom docker repository          | Yes             |
-| SUDO                         | sudo          | Should docker commands be prefixed with sudo. Change to "" to omit sudo. | Yes             |
-| RABBITMQ_REPLICAS            | 3             | Number of nodes in the cluster                                           | No              |
-| RABBITMQ_DEFAULT_USER        | None          | The default username to access the management console                    | Yes             |
-| RABBITMQ_DEFAULT_PASS        | None          | The default password to access the management console                    | Yes             |
-| RABBITMQ_ERLANG_COOKIE       | None          | Erlang secret needed for nodes communication                             | Yes             |
-| RABBITMQ_EXPOSE_MANAGEMENT   | FALSE         | Should RMQ management console be exposed outside                         | Yes             |
+| Name                         | Default Value         | Purpose                                                                  | Can be changed? |
+|------------------------------|-----------------------|--------------------------------------------------------------------------|-----------------|
+| DOCKER_REPOSITORY            | nanit                 | Change it if you want to build and use custom docker repository          | Yes             |
+| SUDO                         | sudo                  | Should docker commands be prefixed with sudo. Change to "" to omit sudo. | Yes             |
+| RABBITMQ_REPLICAS            | 3                     | Number of nodes in the cluster                                           | No              |
+| RABBITMQ_DEFAULT_USER        | None                  | The default username to access the management console                    | Yes             |
+| RABBITMQ_DEFAULT_PASS        | None                  | The default password to access the management console                    | Yes             |
+| RABBITMQ_ERLANG_COOKIE       | None                  | Erlang secret needed for nodes communication                             | Yes             |
+| RABBITMQ_EXPOSE_MANAGEMENT   | FALSE                 | Should RMQ management console be exposed outside                         | Yes             |
+| RABBITMQ_HA_POLICY           | '{"ha-mode":"all"}'   | Set this variable to automatically set [HA policy](https://www.rabbitmq.com/ha.html) on all queues           | Yes             |
 
 ## Deployment:
 
@@ -40,6 +41,7 @@ export RABBITMQ_DEFAULT_USER=username && \
 export RABBITMQ_DEFAULT_PASS=password && \
 export RABBITMQ_ERLANG_COOKIE=secret && \
 export RABBITMQ_EXPOSE_MANAGEMENT=TRUE && \
+export RABBITMQ_HA_POLICY='{"ha-mode":"all"}' && \
 export SUDO="" && \
 make deploy
 ```

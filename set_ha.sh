@@ -1,3 +1,4 @@
+#!/bin/bash
 while true ; do 
   echo "Waiting for RabbitMQ pod to be ready...."
   if [[ $(kubectl get pods | grep rabbitmq-0 | grep Running) ]]; then

@@ -26,7 +26,7 @@ It uses [rabbitmq clusterer plugin](https://github.com/rabbitmq/rabbitmq-cluster
 | RABBITMQ_DEFAULT_USER        | None                  | The default username to access the management console                    | Yes             |
 | RABBITMQ_DEFAULT_PASS        | None                  | The default password to access the management console                    | Yes             |
 | RABBITMQ_ERLANG_COOKIE       | None                  | Erlang secret needed for nodes communication                             | Yes             |
-| RABBITMQ_EXPOSE_MANAGEMENT   | FALSE                 | Should RMQ management console be exposed outside                         | Yes             |
+| RABBITMQ_EXPOSE_MANAGEMENT   | FALSE                 | Should RMQ management console be exposed on a LoadBalancer               | Yes             |
 | RABBITMQ_HA_POLICY           | '{"ha-mode":"all"}'   | Set this variable to automatically set [HA policy](https://www.rabbitmq.com/ha.html) on all queues           | Yes             |
 
 ## Deployment:

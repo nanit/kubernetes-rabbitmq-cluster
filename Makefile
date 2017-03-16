@@ -37,17 +37,7 @@ define generate-rabbitmq-stateful-set
 endef
 
 define set-ha-policy-on-rabbitmq-cluster
-	if [ "$(RABBITMQ_SET_HA_POLICY)" = "TRUE" ]; then
-		while true ; do 
-			echo "Waiting for RabbitMQ pod to be ready...."
-			if [[ $(kubectl get pods | grep rabbitmq- | grep Running) ]]; then
-				kubectl exec rabbitmq-0 rabbitmqctl set_policy ha-all ".*" '{"ha-mode":"all"}' --apply-to queues
-				break
-			fi
-			echo "RabbitMQ pod still not ready..."
-			sleep 5
-		done
-	fi
+	if [ "$(RABBITMQ_SET_HA_POLICY)" = "TRUE" ]; then ./set_ha.sh ;fi
 endef
 
 deploy-rabbitmq: docker-rabbitmq

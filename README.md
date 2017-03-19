@@ -41,7 +41,7 @@ export RABBITMQ_DEFAULT_USER=username && \
 export RABBITMQ_DEFAULT_PASS=password && \
 export RABBITMQ_ERLANG_COOKIE=secret && \
 export RABBITMQ_EXPOSE_MANAGEMENT=TRUE && \
-export RABBITMQ_HA_POLICY='{"ha-mode":"all"}' && \
+export RABBITMQ_HA_POLICY='{\"ha-mode\":\"all\"}' && \
 export SUDO="" && \
 make deploy
 ```

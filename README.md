@@ -27,7 +27,7 @@ It uses [rabbitmq clusterer plugin](https://github.com/rabbitmq/rabbitmq-cluster
 | RABBITMQ_DEFAULT_PASS        | None                  | The default password to access the management console                    | Yes             |
 | RABBITMQ_ERLANG_COOKIE       | None                  | Erlang secret needed for nodes communication                             | Yes             |
 | RABBITMQ_EXPOSE_MANAGEMENT   | FALSE                 | Should RMQ management console be exposed on a LoadBalancer               | Yes             |
-| RABBITMQ_HA_POLICY           | '{"ha-mode":"all"}'   | Set this variable to automatically set [HA policy](https://www.rabbitmq.com/ha.html) on all queues           | Yes             |
+| RABBITMQ_HA_POLICY           | None                  | Set this variable to automatically set [HA policy](https://www.rabbitmq.com/ha.html) on all queues           | Yes             |
 
 ## Deployment:
 
@@ -48,7 +48,8 @@ make deploy
 
 ## Usage:
 
-At the end of the installation you should have a service named `rabbitmq` which you can use to connect to the cluster
+At the end of the installation you should have a service named `rabbitmq` which you can use to connect to the cluster.
+If you've set the environment variable `RABBITMQ_HA_POLICY` a policy named `ha-all` is created to match all queues.
 
 ## Changing the number of nodes:
 

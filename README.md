@@ -35,6 +35,7 @@ It uses [rabbitmq clusterer plugin](https://github.com/rabbitmq/rabbitmq-cluster
 2. Run:
 
 ```
+export NAMESPACE=default && \
 export DOCKER_REPOSITORY=nanit && \
 export RABBITMQ_REPLICAS=3 && \
 export RABBITMQ_DEFAULT_USER=username && \

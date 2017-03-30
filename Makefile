@@ -2,6 +2,7 @@
 DOCKER_REPOSITORY?=nanit
 SUDO?=sudo
 
+NAMESPACE?=$(shell curl -s config/$(NANIT_ENV)/$(RABBITMQ_APP_NAME)/namespace)
 RABBITMQ_APP_NAME=rabbitmq
 RABBITMQ_SERVICE_NAME=rabbitmq
 RABBITMQ_MANAGEMENT_SERVICE_NAME=rabbitmq-management
@@ -41,10 +42,11 @@ define set-ha-policy-on-rabbitmq-cluster
 endef
 
 deploy-rabbitmq: docker-rabbitmq
-	kubectl get svc $(RABBITMQ_APP_NAME) || $(call generate-rabbitmq-svc) | kubectl create -f -
-	kubectl get svc $(RABBITMQ_HEADLESS_SERVICE_NAME) || $(call generate-rabbitmq-headless-svc) | kubectl create -f -
-	if [ "$(RABBITMQ_EXPOSE_MANAGEMENT)" = "TRUE" ]; then kubectl get svc $(RABBITMQ_MANAGEMENT_SERVICE_NAME) || $(call generate-rabbitmq-management-svc) | kubectl create -f - ; fi
-	$(call generate-rabbitmq-stateful-set) | kubectl apply -f -
+	kubectl get ns $(NAMESPACE) || kubectl create ns $(NAMESPACE)
+	kubectl get svc -n $(NAMESPACE) $(RABBITMQ_APP_NAME) || $(call generate-rabbitmq-svc) | kubectl create -n $(NAMESPACE) -f -
+	kubectl get svc -n $(NAMESPACE) $(RABBITMQ_HEADLESS_SERVICE_NAME) || $(call generate-rabbitmq-headless-svc) | kubectl create -n $(NAMESPACE) -f -
+	if [ "$(RABBITMQ_EXPOSE_MANAGEMENT)" = "TRUE" ]; then kubectl get svc -n $(NAMESPACE) $(RABBITMQ_MANAGEMENT_SERVICE_NAME) || $(call generate-rabbitmq-management-svc) | kubectl create -n $(NAMESPACE) -f - ; fi
+	$(call generate-rabbitmq-stateful-set) | kubectl apply -n $(NAMESPACE) -f -
 	$(call set-ha-policy-on-rabbitmq-cluster)
 
 docker-rabbitmq:

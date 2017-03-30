@@ -20,7 +20,7 @@ It uses [rabbitmq clusterer plugin](https://github.com/rabbitmq/rabbitmq-cluster
 ## Environment Variables:
 | Name                         | Default Value         | Purpose                                                                  | Can be changed? |
 |------------------------------|-----------------------|--------------------------------------------------------------------------|-----------------|
-| NAMESPACE                    | default               | Change it if you want to create the RabbitMQ cluster in a custom Kubernetes namespace          | Yes             |
+| NAMESPACE                    | default               | Change it if you want to create the RabbitMQ cluster in a custom Kubernetes namespace. If the namespace does not exist, it will be created for you.          | Yes             |
 | DOCKER_REPOSITORY            | nanit                 | Change it if you want to build and use custom docker repository          | Yes             |
 | SUDO                         | sudo                  | Should docker commands be prefixed with sudo. Change to "" to omit sudo. | Yes             |
 | RABBITMQ_REPLICAS            | 3                     | Number of nodes in the cluster                                           | No              |

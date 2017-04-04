@@ -56,6 +56,11 @@ If you've set the environment variable `RABBITMQ_HA_POLICY` a policy named `ha-a
 Number of nodes is configurable with RABBITMQ_REPLICAS environment variable.
 Note that changing the number of nodes after the initial deployment of the cluster is problematic since old rabbitmq instance won't fetch the new nodes hosts into the clusterer.config file.
 
+For now, the best option is to:
+
+1. Delete the current statefulset with `kubectl delete statefulset rabbitmq`
+2. Re-deploy the cluster with the new `RABBITMQ_REPLICAS` value
+
 ## Building your own images:
 If you want to build use your own images make sure to change the DOCKER_REPOSITORY environment variable to your own docker repository.
 It will build the images, push them to your docker repository and use them to create all the needed kubernetes deployments.

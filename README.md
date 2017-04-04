@@ -22,7 +22,7 @@ It uses [rabbitmq clusterer plugin](https://github.com/rabbitmq/rabbitmq-cluster
 |------------------------------|-----------------------|--------------------------------------------------------------------------|-----------------|
 | DOCKER_REPOSITORY            | nanit                 | Change it if you want to build and use custom docker repository          | Yes             |
 | SUDO                         | sudo                  | Should docker commands be prefixed with sudo. Change to "" to omit sudo. | Yes             |
-| RABBITMQ_REPLICAS            | 3                     | Number of nodes in the cluster                                           | No              |
+| RABBITMQ_REPLICAS            | 3                     | Number of nodes in the cluster                                           | Yes             |
 | RABBITMQ_DEFAULT_USER        | None                  | The default username to access the management console                    | Yes             |
 | RABBITMQ_DEFAULT_PASS        | None                  | The default password to access the management console                    | Yes             |
 | RABBITMQ_ERLANG_COOKIE       | None                  | Erlang secret needed for nodes communication                             | Yes             |
@@ -36,7 +36,7 @@ It uses [rabbitmq clusterer plugin](https://github.com/rabbitmq/rabbitmq-cluster
 
 ```
 export DOCKER_REPOSITORY=nanit && \
-export RABBITMQ_REPLICAS=3 && \
+export RABBITMQ_REPLICAS=5 && \
 export RABBITMQ_DEFAULT_USER=username && \
 export RABBITMQ_DEFAULT_PASS=password && \
 export RABBITMQ_ERLANG_COOKIE=secret && \
@@ -53,12 +53,8 @@ If you've set the environment variable `RABBITMQ_HA_POLICY` a policy named `ha-a
 
 ## Changing the number of nodes:
 
-If you'd like to have more than 3 nodes in the cluster you have to:
-
-1. Change the [clusterer.config](https://github.com/nanit/kubernetes-rabbitmq-cluster/blob/master/docker/clusterer.config) to include all the cluster nodes.
-2. Build your own image by setting the `DOCKER_RESPOSITORY` environment variable
-3. Change the `RABBITMQ_REPLICAS` to the new number of nodes
-4. Run the deployment script above
+Number of nodes is configurable with RABBITMQ_REPLICAS environment variable.
+Note that changing the number of nodes after the initial deployment of the cluster is problematic since old rabbitmq instance won't fetch the new nodes hosts into the clusterer.config file.
 
 ## Building your own images:
 If you want to build use your own images make sure to change the DOCKER_REPOSITORY environment variable to your own docker repository.

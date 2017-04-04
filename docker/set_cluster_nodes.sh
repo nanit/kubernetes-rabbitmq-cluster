@@ -20,4 +20,4 @@ done
 JOINED=$(join_by , "${NODES[@]}")
 
 sed -i "s/@@RABBITMQ_NODES@@/$JOINED/g" /etc/rabbitmq/clusterer.config
-sed -i "s/@@RABBITMQ_GOSPEL_NODE@@/rabbit@rabbitmq-0.$SERVICE_NAME/g" /etc/rabbitmq/clusterer.config
+sed -i "s/@@RABBITMQ_GOSPEL_NODE@@/'rabbit@rabbitmq-0.$SERVICE_NAME'/g" /etc/rabbitmq/clusterer.config

@@ -38,7 +38,7 @@ define generate-rabbitmq-stateful-set
 endef
 
 define set-ha-policy-on-rabbitmq-cluster
-	if [ "$(RABBITMQ_HA_POLICY)" != "" ]; then export RABBITMQ_HA_POLICY=$(RABBITMQ_HA_POLICY) && ./set_ha.sh ;fi
+	if [ "$(RABBITMQ_HA_POLICY)" != "" ]; then export RABBITMQ_HA_POLICY=$(RABBITMQ_HA_POLICY) && export NAMESPACE=$(NAMESPACE) && ./set_ha.sh ;fi
 endef
 
 deploy-rabbitmq: docker-rabbitmq

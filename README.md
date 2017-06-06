@@ -52,6 +52,15 @@ make deploy
 
 At the end of the installation you should have a service named `rabbitmq` which you can use to connect to the cluster.
 If you've set the environment variable `RABBITMQ_HA_POLICY` a policy named `ha-all` is created to match all queues.
+These are the resource you're supposed to see on the cluster when running `kubectl get pods,svc`:
+
+![k8s-resources](https://github.com/nanit/kubernetes-rabbitmq-cluster/blob/master/k8s-resources.png)
+
+Please note the following:
+
+1. The number of rabbitmq pods may be different in case you chose a different number of `RABBITMQ_REPLICAS` than 5
+2. The rabbitmq-management service will only be available if you've set `RABBITMQ_EXPOSE_MANAGEMENT` to TRUE
+
 
 ## Changing the number of nodes:
 

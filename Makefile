@@ -15,6 +15,7 @@ RABBITMQ_DEFAULT_USER?=$(shell curl -s config/$(NANIT_ENV)/$(RABBITMQ_APP_NAME)/
 RABBITMQ_DEFAULT_PASS?=$(shell curl -s config/$(NANIT_ENV)/$(RABBITMQ_APP_NAME)/password)
 RABBITMQ_ERLANG_COOKIE?=$(shell curl -s config/$(NANIT_ENV)/$(RABBITMQ_APP_NAME)/erlang_cookie)
 RABBITMQ_EXPOSE_MANAGEMENT?=$(shell curl -s config/$(NANIT_ENV)/$(RABBITMQ_APP_NAME)/expose_management)
+RABBITMQ_MANGEMENT_SERVICE_TYPE?=$(shell curl -s config/$(NANIT_ENV)/$(RABBITMQ_APP_NAME)/management_service_type)
 RABBITMQ_HA_POLICY?=$(shell curl -s config/$(NANIT_ENV)/$(RABBITMQ_APP_NAME)/ha_policy)
 
 define generate-rabbitmq-headless-svc
@@ -22,7 +23,7 @@ define generate-rabbitmq-headless-svc
 endef
 
 define generate-rabbitmq-management-svc
-	sed -e 's/{{APP_NAME}}/$(RABBITMQ_APP_NAME)/g;s/{{SVC_NAME}}/$(RABBITMQ_MANAGEMENT_SERVICE_NAME)/g' kube/svc.management.yml
+	sed -e 's/{{APP_NAME}}/$(RABBITMQ_APP_NAME)/g;s/{{SVC_NAME}}/$(RABBITMQ_MANAGEMENT_SERVICE_NAME)/g;s/{{SERVICE_TYPE}}/$(RABBITMQ_MANAGEMENT_SERVICE_TYPE)/g' kube/svc.management.yml
 endef
 
 define generate-rabbitmq-svc

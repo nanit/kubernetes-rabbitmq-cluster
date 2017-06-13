@@ -3,7 +3,7 @@ apiVersion: v1
 metadata:
   name: {{SVC_NAME}}
 spec:
-  type: LoadBalancer
+  type: {{SERVICE_TYPE}}
   selector:
     app: {{APP_NAME}}
   ports:

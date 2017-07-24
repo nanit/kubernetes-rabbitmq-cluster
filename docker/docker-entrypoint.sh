@@ -230,7 +230,7 @@ if [ "$1" = 'rabbitmq-server' ] && [ "$haveConfig" ]; then
 	fi
 
   rabbitConfig+=(
-    "{ log_levels, [{connection, error}, {mirorring, error}, {channel, error}, {federation, error}] }"
+    "{ log_levels, [{connection, error}, {mirroring, error}, {channel, error}, {federation, error}] }"
   )
 
 	IFS=$'\n'

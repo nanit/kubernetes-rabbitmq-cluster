@@ -28,6 +28,8 @@ spec:
             value: {{RABBITMQ_DEFAULT_USER}}
           - name: RABBITMQ_DEFAULT_PASS
             value: "{{RABBITMQ_DEFAULT_PASS}}"
+          - name: RABBITMQ_LOG_LEVEL
+            value: "{{RABBITMQ_LOG_LEVEL}}"
           - name: RABBITMQ_ERLANG_COOKIE
             value: "{{RABBITMQ_ERLANG_COOKIE}}"
           - name: RABBITMQ_USE_LONGNAME

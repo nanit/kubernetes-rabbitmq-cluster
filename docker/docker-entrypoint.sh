@@ -229,6 +229,10 @@ if [ "$1" = 'rabbitmq-server' ] && [ "$haveConfig" ]; then
 		)
 	fi
 
+  rabbitConfig+=(
+    "{ log_levels, [{connection, ${RABBITMQ_LOG_LEVEL}}, {mirroring, ${RABBITMQ_LOG_LEVEL}}, {channel, ${RABBITMQ_LOG_LEVEL}}, {federation, ${RABBITMQ_LOG_LEVEL}}] }"
+  )
+
 	IFS=$'\n'
 	rabbitConfig+=( $(rabbit_env_config '' "${rabbitConfigKeys[@]}") )
 	unset IFS

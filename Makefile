@@ -4,6 +4,7 @@ SUDO?=sudo
 
 RABBITMQ_APP_NAME=rabbitmq
 RABBITMQ_SERVICE_NAME=rabbitmq
+RABBITMQ_SECRET_NAME=rabbitmq-secret
 RABBITMQ_MANAGEMENT_SERVICE_NAME=rabbitmq-management
 RABBITMQ_HEADLESS_SERVICE_NAME=rmq-cluster
 RABBITMQ_DOCKER_DIR=docker
@@ -31,13 +32,18 @@ define generate-rabbitmq-svc
 	sed -e 's/{{APP_NAME}}/$(RABBITMQ_APP_NAME)/g;s/{{SVC_NAME}}/$(RABBITMQ_SERVICE_NAME)/g' kube/svc.yml
 endef
 
+RABBITMQ_ERLANG_COOKIE_BASE64_ENCODED= $(echo $(RABBITMQ_ERLANG_COOKIE) | base64)
+
+define generate-rabbitmq-secret
+	sed -e 's/{{APP_NAME}}/$(RABBITMQ_APP_NAME)/g;s/{{SECRET_NAME}}/$(RABBITMQ_SECRET_NAME)/g;s/{{ERLANG_COOKIE_KEY}}/$(RABBITMQ_ERLANG_COOKIE_BASE64_ENCODED)/g' kube/secret.yml
+endef
+
 define generate-rabbitmq-stateful-set
 	if [ -z "$(RABBITMQ_REPLICAS)" ]; then echo "ERROR: RABBITMQ_REPLICAS is empty!"; exit 1; fi
 	if [ -z "$(RABBITMQ_DEFAULT_USER)" ]; then echo "ERROR: RABBITMQ_DEFAULT_USER is empty!"; exit 1; fi
 	if [ -z "$(RABBITMQ_DEFAULT_PASS)" ]; then echo "ERROR: RABBITMQ_DEFAULT_PASS is empty!"; exit 1; fi
-	if [ -z "$(RABBITMQ_ERLANG_COOKIE)" ]; then echo "ERROR: RABBITMQ_ERLANG_COOKIE is empty!"; exit 1; fi
 	if [ -z "$(RABBITMQ_LOG_LEVEL)" ]; then echo "ERROR: RABBITMQ_LOG_LEVEL is empty!"; exit 1; fi
-	sed -e 's/{{SVC_NAME}}/$(RABBITMQ_HEADLESS_SERVICE_NAME)/g;s/{{APP_NAME}}/$(RABBITMQ_APP_NAME)/g;s,{{IMAGE_NAME}},$(RABBITMQ_IMAGE_NAME),g;s/{{REPLICAS}}/$(RABBITMQ_REPLICAS)/g;s/{{RABBITMQ_DEFAULT_USER}}/$(RABBITMQ_DEFAULT_USER)/g;s/{{RABBITMQ_DEFAULT_PASS}}/$(RABBITMQ_DEFAULT_PASS)/g;s/{{RABBITMQ_ERLANG_COOKIE}}/$(RABBITMQ_ERLANG_COOKIE)/g;s/{{RABBITMQ_LOG_LEVEL}}/$(RABBITMQ_LOG_LEVEL)/g' kube/stateful.set.yml
+	sed -e 's/{{SVC_NAME}}/$(RABBITMQ_HEADLESS_SERVICE_NAME)/g;s/{{APP_NAME}}/$(RABBITMQ_APP_NAME)/g;s,{{IMAGE_NAME}},$(RABBITMQ_IMAGE_NAME),g;s/{{REPLICAS}}/$(RABBITMQ_REPLICAS)/g;s/{{RABBITMQ_DEFAULT_USER}}/$(RABBITMQ_DEFAULT_USER)/g;s/{{RABBITMQ_DEFAULT_PASS}}/$(RABBITMQ_DEFAULT_PASS)/g;s/{{RABBITMQ_LOG_LEVEL}}/$(RABBITMQ_LOG_LEVEL)/g;s/{{SECRET_NAME}}/$(RABBITMQ_SECRET_NAME)/g' kube/stateful.set.yml
 endef
 
 define set-ha-policy-on-rabbitmq-cluster
@@ -47,6 +53,7 @@ endef
 deploy-rabbitmq: docker-rabbitmq
 	kubectl get ns $(NAMESPACE) || kubectl create ns $(NAMESPACE)
 	kubectl get svc -n $(NAMESPACE) $(RABBITMQ_APP_NAME) || $(call generate-rabbitmq-svc) | kubectl create -n $(NAMESPACE) -f -
+	kubectl get secret -n $(NAMESPACE) $(RABBITMQ_APP_NAME) || $(call generate-rabbitmq-secret) | kubectl create -n $(NAMESPACE) -f -
 	kubectl get svc -n $(NAMESPACE) $(RABBITMQ_HEADLESS_SERVICE_NAME) || $(call generate-rabbitmq-headless-svc) | kubectl create -n $(NAMESPACE) -f -
 	if [ "$(RABBITMQ_EXPOSE_MANAGEMENT)" = "TRUE" ]; then kubectl get svc -n $(NAMESPACE) $(RABBITMQ_MANAGEMENT_SERVICE_NAME) || $(call generate-rabbitmq-management-svc) | kubectl create -n $(NAMESPACE) -f - ; fi
 	$(call generate-rabbitmq-stateful-set) | kubectl apply -n $(NAMESPACE) -f -

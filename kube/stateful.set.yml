@@ -40,3 +40,8 @@ spec:
                 fieldPath: metadata.name
           - name: RABBITMQ_NODENAME
             value: rabbit@$(NODE_NAME).{{SVC_NAME}}
+          - name: RABBITMQ_ERLANG_COOKIE
+            valueFrom:
+              secretKeyRef:
+                name: {{SECRET_NAME}}
+                key: erlang-cookie                

@@ -40,3 +40,4 @@ spec:
                 fieldPath: metadata.name
           - name: RABBITMQ_NODENAME
             value: rabbit@$(NODE_NAME).{{SVC_NAME}}
+      {{SERVICE_ACCOUNT}}

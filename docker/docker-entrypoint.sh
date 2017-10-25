@@ -212,6 +212,11 @@ if [ "$1" = 'rabbitmq-server' ] && [ "$haveConfig" ]; then
 		"{ loopback_users, $(rabbit_array) }"
 	)
 
+  rabbitConfig+=(
+    "{ vm_memory_high_watermark, 0.8}"
+  )
+
+
 	if [ "$haveSslConfig" ]; then
 		IFS=$'\n'
 		rabbitSslOptions=( $(rabbit_env_config 'ssl' "${sslConfigKeys[@]}") )

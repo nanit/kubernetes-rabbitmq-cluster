@@ -18,20 +18,20 @@ It uses [rabbitmq clusterer plugin](https://github.com/rabbitmq/rabbitmq-cluster
 4. An optional, rabbitmq-management service to access the admin control panel
 
 ## Environment Variables:
-| Name                         | Default Value         | Purpose                                                                  
+| Name                         | Default Value         | Purpose
 |------------------------------|-----------------------|--------------------------------------------------------------------------
-| NAMESPACE                    | default               | Change it if you want to create the RabbitMQ cluster in a custom Kubernetes namespace. If the namespace does not exist in the moment of deployment, it will be created for you.          
-| DOCKER_REPOSITORY            | nanit                 | Change it if you want to build and use custom docker repository          
-| SUDO                         | sudo                  | Should docker commands be prefixed with sudo. Change to "" to omit sudo. 
+| NAMESPACE                    | default               | Change it if you want to create the RabbitMQ cluster in a custom Kubernetes namespace. If the namespace does not exist in the moment of deployment, it will be created for you.
+| DOCKER_REPOSITORY            | nanit                 | Change it if you want to build and use custom docker repository
+| SUDO                         | sudo                  | Should docker commands be prefixed with sudo. Change to "" to omit sudo.
 | RBAC                         | FALSE                 | Should create a role/system account and role binding
-| RABBITMQ_REPLICAS            | 3                     | Number of nodes in the cluster                                           
-| RABBITMQ_DEFAULT_USER        | None                  | The default username to access the management console                    
-| RABBITMQ_DEFAULT_PASS        | None                  | The default password to access the management console                    
-| RABBITMQ_ERLANG_COOKIE       | None                  | Erlang secret needed for nodes communication                             
-| RABBITMQ_EXPOSE_MANAGEMENT   | FALSE                 | Should RMQ management console be exposed as a service              
-| RABBITMQ_MANAGEMENT_SERVICE_TYPE   | LoadBalancer    | [Kubernetes service](https://kubernetes.io/docs/concepts/services-networking/service/) type for the management console                       
-| RABBITMQ_HA_POLICY           | None                  | Set this variable to automatically set [HA policy](https://www.rabbitmq.com/ha.html) on all queues           
-| RABBITMQ_LOG_LEVEL           | info                  | Log levels are set for all RabbitMQ log types: connection, mirroring, channel and federation. Valid values are: none, error, warning, info, debug 
+| RABBITMQ_REPLICAS            | 3                     | Number of nodes in the cluster
+| RABBITMQ_DEFAULT_USER        | None                  | The default username to access the management console
+| RABBITMQ_DEFAULT_PASS        | None                  | The default password to access the management console
+| RABBITMQ_ERLANG_COOKIE       | None                  | Erlang secret needed for nodes communication
+| RABBITMQ_EXPOSE_MANAGEMENT   | FALSE                 | Should RMQ management console be exposed as a service
+| RABBITMQ_MANAGEMENT_SERVICE_TYPE   | LoadBalancer    | [Kubernetes service](https://kubernetes.io/docs/concepts/services-networking/service/) type for the management console
+| RABBITMQ_HA_POLICY           | None                  | Set this variable to automatically set [HA policy](https://www.rabbitmq.com/ha.html) on all queues
+| RABBITMQ_LOG_LEVEL           | info                  | Log levels are set for all RabbitMQ log types: connection, mirroring, channel and federation. Valid values are: none, error, warning, info, debug
 
 ## Deployment:
 
@@ -39,17 +39,7 @@ It uses [rabbitmq clusterer plugin](https://github.com/rabbitmq/rabbitmq-cluster
 2. Run:
 
 ```
-export NAMESPACE=default && \
-export DOCKER_REPOSITORY=nanit && \
-export RABBITMQ_REPLICAS=5 && \
-export RABBITMQ_DEFAULT_USER=username && \
-export RABBITMQ_DEFAULT_PASS=password && \
-export RABBITMQ_ERLANG_COOKIE=secret && \
-export RABBITMQ_EXPOSE_MANAGEMENT=TRUE && \
-export RABBITMQ_MANAGEMENT_SERVICE_TYPE=LoadBalancer && \
-export RABBITMQ_HA_POLICY='{\"ha-mode\":\"all\"}' && \
-export RABBITMQ_LOG_LEVEL=info && \
-export SUDO="" && \
+source /keybase/team/camversity/secrets/rabbitmq/env
 make deploy
 ```
 

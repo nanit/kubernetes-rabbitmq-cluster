@@ -14,10 +14,6 @@ spec:
       containers:
       - name: {{APP_NAME}}
         image: {{IMAGE_NAME}}
-        resources:
-          requests:
-            cpu: 300m
-            memory: 5120Mi
         ports:
           - name: queue-port
             containerPort: 5672
@@ -27,7 +23,7 @@ spec:
             containerPort: 4369
           - name: dist-port
             containerPort: 25672
-        env: 
+        env:
           - name: RABBITMQ_DEFAULT_USER
             value: {{RABBITMQ_DEFAULT_USER}}
           - name: RABBITMQ_DEFAULT_PASS

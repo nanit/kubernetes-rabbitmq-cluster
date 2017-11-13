@@ -10,3 +10,6 @@ spec:
   ports:
     - name: management-console
       port: 15672
+
+    - name: stomp
+      port: 15674

@@ -1,5 +1,5 @@
 .PHONY: deploy
-DOCKER_REPOSITORY?=nanit
+DOCKER_REPOSITORY=nanit
 SUDO?=sudo
 
 RABBITMQ_APP_NAME=rabbitmq

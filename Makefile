@@ -1,5 +1,5 @@
 .PHONY: deploy
-DOCKER_REPOSITORY=gcr.io/camversity-183908
+DOCKER_REPOSITORY=nanit
 SUDO?=sudo
 
 RABBITMQ_APP_NAME=rabbitmq

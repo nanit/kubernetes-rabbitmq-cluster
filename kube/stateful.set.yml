@@ -19,8 +19,6 @@ spec:
             containerPort: 5672
           - name: management-port
             containerPort: 15672
-          - name: stomp
-            containerPort: 15674
           - name: cluster-port
             containerPort: 4369
           - name: dist-port

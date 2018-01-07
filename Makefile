@@ -10,7 +10,7 @@ RABBITMQ_DOCKER_DIR=docker
 NAMESPACE?=$(shell curl -s config/$(NANIT_ENV)/$(RABBITMQ_APP_NAME)/namespace)
 RBAC?=FALSE
 SERVICE_ACCOUNT=$(shell if [ "$(RBAC)" = "TRUE" ]; then echo '\"serviceAccount\": \"$(RABBITMQ_APP_NAME)-sa\"'; fi)
-NODE_SCHEDULING_POLICY?=$(shell printf "nodeSelector:\n  some: test")
+NODE_SCHEDULING_POLICY?="nodeSelector:\n      dedicated: infra"
 RABBITMQ_IMAGE_TAG=$(shell git log -n 1 --pretty=format:%h $(RABBITMQ_DOCKER_DIR))
 RABBITMQ_IMAGE_NAME=$(DOCKER_REPOSITORY)/$(RABBITMQ_APP_NAME):$(RABBITMQ_IMAGE_TAG)
 RABBITMQ_REPLICAS?=$(shell curl -s config/$(NANIT_ENV)/$(RABBITMQ_APP_NAME)/replicas)

@@ -32,6 +32,7 @@ It uses [rabbitmq clusterer plugin](https://github.com/rabbitmq/rabbitmq-cluster
 | RABBITMQ_MANAGEMENT_SERVICE_TYPE   | LoadBalancer    | [Kubernetes service](https://kubernetes.io/docs/concepts/services-networking/service/) type for the management console                       
 | RABBITMQ_HA_POLICY           | None                  | Set this variable to automatically set [HA policy](https://www.rabbitmq.com/ha.html) on all queues           
 | RABBITMQ_LOG_LEVEL           | info                  | Log levels are set for all RabbitMQ log types: connection, mirroring, channel and federation. Valid values are: none, error, warning, info, debug 
+| RABBITMQ_ADDITIONAL_YAML     | ""                    | Inject additional arbitrary YAML into the stateful set 
 
 ## Deployment:
 
@@ -49,6 +50,7 @@ export RABBITMQ_EXPOSE_MANAGEMENT=TRUE && \
 export RABBITMQ_MANAGEMENT_SERVICE_TYPE=LoadBalancer && \
 export RABBITMQ_HA_POLICY='{\"ha-mode\":\"all\"}' && \
 export RABBITMQ_LOG_LEVEL=info && \
+export RABBITMQ_ADDITIONAL_YAML="" && \
 export SUDO="" && \
 make deploy
 ```

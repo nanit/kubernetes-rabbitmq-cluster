@@ -51,9 +51,6 @@ define set-rbac-policy
 	sed -e 's/{{APP_NAME}}/$(RABBITMQ_APP_NAME)/g;s/{{NAMESPACE}}/$(NAMESPACE)/g' kube/rbac.role.yml
 endef
 
-test-yaml:
-	$(call generate-rabbitmq-stateful-set)
-
 deploy-rabbitmq: docker-rabbitmq
 	kubectl get ns $(NAMESPACE) || kubectl create ns $(NAMESPACE)
 	kubectl get svc -n $(NAMESPACE) $(RABBITMQ_APP_NAME) || $(call generate-rabbitmq-svc) | kubectl create -n $(NAMESPACE) -f -

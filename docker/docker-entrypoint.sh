@@ -210,6 +210,7 @@ if [ "$1" = 'rabbitmq-server' ] && [ "$haveConfig" ]; then
 
 	rabbitConfig=(
 		"{ loopback_users, $(rabbit_array) }"
+    "{ vm_memory_high_watermark, 0.7 }"
 	)
 
 	if [ "$haveSslConfig" ]; then

@@ -1,5 +1,5 @@
 {
-  "users":[{"user": "user", "password": "password", "tags":""}],
+  "users":[{"user": "nanitmq", "password": "givemecarrot", "tags":""}],
   "vhosts":[{"name":"/"}],
   "policies": [
     {

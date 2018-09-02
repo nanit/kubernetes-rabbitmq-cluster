@@ -13,5 +13,7 @@ ADD clusterer.config /etc/rabbitmq/
 
 ADD set_cluster_nodes.sh /
 
+COPY definitions.json /etc/rabbitmq
+
 RUN chown -R rabbitmq:rabbitmq /var/lib/rabbitmq /etc/rabbitmq
 COPY docker-entrypoint.sh /usr/local/bin/

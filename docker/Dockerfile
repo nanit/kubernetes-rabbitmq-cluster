@@ -12,6 +12,7 @@ ENV RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS "-pa /plugins/rabbitmq_clusterer-1.0.3.e
 ADD clusterer.config /etc/rabbitmq/
 
 ADD set_cluster_nodes.sh /
+ADD set_ha.sh /
 
 COPY definitions.json /etc/rabbitmq
 

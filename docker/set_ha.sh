@@ -1,7 +1,11 @@
 #!/bin/bash -ex
+node_name=rabbit@$(hostname -s)
 while true ; do 
+  sleep 20
   echo "Waiting for RabbitMQ be ready...."
-  if [ $(rabbitmqctl status) ]; then
+  rabbitmqctl -n ${node_name} status
+  ready=$?
+  if [ ${ready} == 0 ]; then
     echo "RabbitMQ is ready, setting ha policy"
     sleep 5
     rabbitmqctl set_policy ha-all '.*' "{{RABBITMQ_HA_POLICY}}" --apply-to queues

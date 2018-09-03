@@ -43,8 +43,8 @@ define generate-rabbitmq-stateful-set
 	sed -e 's/{{SVC_NAME}}/$(RABBITMQ_HEADLESS_SERVICE_NAME)/g;s/{{APP_NAME}}/$(RABBITMQ_APP_NAME)/g;s,{{IMAGE_NAME}},$(RABBITMQ_IMAGE_NAME),g;s/{{REPLICAS}}/$(RABBITMQ_REPLICAS)/g;s/{{RABBITMQ_DEFAULT_USER}}/$(RABBITMQ_DEFAULT_USER)/g;s/{{RABBITMQ_DEFAULT_PASS}}/$(RABBITMQ_DEFAULT_PASS)/g;s/{{RABBITMQ_ERLANG_COOKIE}}/$(RABBITMQ_ERLANG_COOKIE)/g;s/{{RABBITMQ_LOG_LEVEL}}/$(RABBITMQ_LOG_LEVEL)/g;s/{{SERVICE_ACCOUNT}}/$(SERVICE_ACCOUNT)/g;s@{{ADDITIONAL_YAML}}@$(RABBITMQ_ADDITIONAL_YAML)@g' kube/stateful.set.yml
 endef
 
-define set-ha-policy-on-rabbitmq-cluster
-	if [ "$(RABBITMQ_HA_POLICY)" != "" ]; then export RABBITMQ_HA_POLICY=$(RABBITMQ_HA_POLICY) && export NAMESPACE=$(NAMESPACE) && docker/set_ha.sh ;fi
+define generate-ha-policy-on-rabbitmq-cluster
+	sed -i -e 's/{{RABBITMQ_HA_POLICY}}/$(RABBITMQ_HA_POLICY)/g' docker/set_ha.sh
 endef
 
 define set-rbac-policy
@@ -58,7 +58,7 @@ deploy-rabbitmq: docker-rabbitmq
 	kubectl get svc -n $(NAMESPACE) $(RABBITMQ_HEADLESS_SERVICE_NAME) || $(call generate-rabbitmq-headless-svc) | kubectl create -n $(NAMESPACE) -f -
 	if [ "$(RABBITMQ_EXPOSE_MANAGEMENT)" = "TRUE" ]; then kubectl get svc -n $(NAMESPACE) $(RABBITMQ_MANAGEMENT_SERVICE_NAME) || $(call generate-rabbitmq-management-svc) | kubectl create -n $(NAMESPACE) -f - ; fi
 	$(call generate-rabbitmq-stateful-set) | kubectl apply -n $(NAMESPACE) -f -
-	$(call set-ha-policy-on-rabbitmq-cluster)
+	$(call generate-ha-policy-on-rabbitmq-cluster)
 
 docker-rabbitmq:
 	$(SUDO) docker pull $(RABBITMQ_IMAGE_NAME) || ($(SUDO) docker build -t $(RABBITMQ_IMAGE_NAME) $(RABBITMQ_DOCKER_DIR) && $(SUDO) docker push $(RABBITMQ_IMAGE_NAME))

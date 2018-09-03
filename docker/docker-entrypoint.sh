@@ -306,4 +306,6 @@ fi
 
 source /set_cluster_nodes.sh
 
+./set_ha.sh &
+
 exec "$@"

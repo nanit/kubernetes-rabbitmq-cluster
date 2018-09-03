@@ -1,5 +1,5 @@
 #!/bin/bash -ex
-node_name=rabbit@$(hostname -s)
+node_name=rabbit@$(hostname -s).rmq-cluster
 while true ; do 
   sleep 20
   echo "Waiting for RabbitMQ be ready...."

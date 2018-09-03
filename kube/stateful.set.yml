@@ -44,5 +44,9 @@ spec:
                 fieldPath: metadata.name
           - name: RABBITMQ_NODENAME
             value: rabbit@$(NODE_NAME).{{SVC_NAME}}
+        lifecycle:
+          postStart:
+            exec:
+              command: ["/bin/sh", "-c" "./set_ha"]
       {{SERVICE_ACCOUNT}}
       {{ADDITIONAL_YAML}}

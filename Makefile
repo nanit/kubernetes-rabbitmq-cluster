@@ -51,17 +51,16 @@ define set-rbac-policy
 	sed -e 's/{{APP_NAME}}/$(RABBITMQ_APP_NAME)/g;s/{{NAMESPACE}}/$(NAMESPACE)/g' kube/rbac.role.yml
 endef
 
-deploy-rabbitmq: 
-	$(call generate-ha-policy-on-rabbitmq-cluster) 
-	docker-rabbitmq
+deploy-rabbitmq: docker-rabbitmq
 	kubectl get ns $(NAMESPACE) || kubectl create ns $(NAMESPACE)
 	kubectl get svc -n $(NAMESPACE) $(RABBITMQ_APP_NAME) || $(call generate-rabbitmq-svc) | kubectl create -n $(NAMESPACE) -f -
 	if [ "$(RBAC)" = "TRUE" ]; then $(call set-rbac-policy) | kubectl apply -f - ; fi
 	kubectl get svc -n $(NAMESPACE) $(RABBITMQ_HEADLESS_SERVICE_NAME) || $(call generate-rabbitmq-headless-svc) | kubectl create -n $(NAMESPACE) -f -
 	if [ "$(RABBITMQ_EXPOSE_MANAGEMENT)" = "TRUE" ]; then kubectl get svc -n $(NAMESPACE) $(RABBITMQ_MANAGEMENT_SERVICE_NAME) || $(call generate-rabbitmq-management-svc) | kubectl create -n $(NAMESPACE) -f - ; fi
-	$(call generate-rabbitmq-stateful-set) | kubectl apply -n $(NAMESPACE) -f -
+    $(call generate-rabbitmq-stateful-set) | kubectl apply -n $(NAMESPACE) -f -
 
 docker-rabbitmq:
+	$(call generate-ha-policy-on-rabbitmq-cluster)
 	$(SUDO) docker pull $(RABBITMQ_IMAGE_NAME) || ($(SUDO) docker build -t $(RABBITMQ_IMAGE_NAME) $(RABBITMQ_DOCKER_DIR) && $(SUDO) docker push $(RABBITMQ_IMAGE_NAME))
 
 deploy: deploy-rabbitmq

@@ -1,9 +1,8 @@
 #!/bin/bash -ex
-node_name=rabbit@$(hostname -s).rmq-cluster
 while true ; do 
   sleep 20
   echo "Waiting for RabbitMQ be ready...."
-  rabbitmqctl -n ${node_name} status
+  rabbitmqctl status
   ready=$?
   if [ ${ready} == 0 ]; then
     echo "RabbitMQ is ready, setting ha policy"

@@ -47,7 +47,8 @@ spec:
         lifecycle:
           postStart:
             exec:
-              command: 
-                - "/set_ha.sh"
+              command:
+                - "/bin/sh"
+                - "./set_ha.sh"
       {{SERVICE_ACCOUNT}}
       {{ADDITIONAL_YAML}}

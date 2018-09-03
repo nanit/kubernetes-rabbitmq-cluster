@@ -15,3 +15,4 @@ while true ; do
   echo "RabbitMQ still not ready..."
   sleep 5
 done
+

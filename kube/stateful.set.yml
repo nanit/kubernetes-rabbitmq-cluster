@@ -48,8 +48,6 @@ spec:
           postStart:
             exec:
               command: 
-                - "/bin/sh" 
-                - "-c" 
-                - "./set_ha"
+                - "/set_ha.sh"
       {{SERVICE_ACCOUNT}}
       {{ADDITIONAL_YAML}}

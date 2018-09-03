@@ -57,7 +57,7 @@ deploy-rabbitmq: docker-rabbitmq
 	if [ "$(RBAC)" = "TRUE" ]; then $(call set-rbac-policy) | kubectl apply -f - ; fi
 	kubectl get svc -n $(NAMESPACE) $(RABBITMQ_HEADLESS_SERVICE_NAME) || $(call generate-rabbitmq-headless-svc) | kubectl create -n $(NAMESPACE) -f -
 	if [ "$(RABBITMQ_EXPOSE_MANAGEMENT)" = "TRUE" ]; then kubectl get svc -n $(NAMESPACE) $(RABBITMQ_MANAGEMENT_SERVICE_NAME) || $(call generate-rabbitmq-management-svc) | kubectl create -n $(NAMESPACE) -f - ; fi
-    $(call generate-rabbitmq-stateful-set) | kubectl apply -n $(NAMESPACE) -f -
+	$(call generate-rabbitmq-stateful-set) | kubectl apply -n $(NAMESPACE) -f -
 
 docker-rabbitmq:
 	$(call generate-ha-policy-on-rabbitmq-cluster)

@@ -1,5 +1,6 @@
 #!/bin/bash -ex
 while true ; do 
+  sleep 20
   echo "Waiting for RabbitMQ be ready...."
   if [ $(rabbitmqctl status) ]; then
     echo "RabbitMQ is ready, setting ha policy: $RABBITMQ_HA_POLICY"

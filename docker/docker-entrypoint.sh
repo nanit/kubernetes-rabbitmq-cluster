@@ -306,4 +306,7 @@ fi
 
 source /set_cluster_nodes.sh
 
+# Set RabbitMQ policies
+./set_ha.sh &
+
 exec "$@"

@@ -67,7 +67,7 @@ docker-rabbitmq:
 deploy: deploy-rabbitmq
 
 clean:
-	kubectl delete statefulset $(RABBITMQ_APP_NAME)
-	kubectl delete service $(RABBITMQ_SERVICE_NAME)
-	kubectl delete service $(RABBITMQ_MANAGEMENT_SERVICE_NAME)
-	kubectl delete service $(RABBITMQ_HEADLESS_SERVICE_NAME)
+	kubectl delete statefulset $(RABBITMQ_APP_NAME) || true
+	kubectl delete service $(RABBITMQ_SERVICE_NAME) || true
+	kubectl delete service $(RABBITMQ_MANAGEMENT_SERVICE_NAME) || true
+	kubectl delete service $(RABBITMQ_HEADLESS_SERVICE_NAME) || true

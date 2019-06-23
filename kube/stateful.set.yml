@@ -40,6 +40,10 @@ spec:
             value: "{{RABBITMQ_ERLANG_COOKIE}}"
           - name: RABBITMQ_USE_LONGNAME
             value: "true"
+          - name: POD_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
           - name: NODE_NAME
             valueFrom:
               fieldRef:

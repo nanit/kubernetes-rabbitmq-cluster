@@ -13,7 +13,7 @@ It uses [rabbitmq clusterer plugin](https://github.com/rabbitmq/rabbitmq-cluster
 ## Contents:
 
 1. A 3 nodes rabbitmq cluster as StatefulSet
-2. A rmq-cluster headless service to control the StatefulSet domain
+2. A rabbitmq-headless headless service to control the StatefulSet domain
 3. a rabbitmq service to access the cluster
 4. An optional, rabbitmq-management service to access the admin control panel
 
@@ -89,7 +89,4 @@ You can run the same setup in docker-compose using
 $ docker-compose build && docker-compose up
 ```
 Then, go to `localhost:15672` and you'll see the cluster is already formed up.
-
-## Future work:
-1. Allow setting a different number of replicas
 

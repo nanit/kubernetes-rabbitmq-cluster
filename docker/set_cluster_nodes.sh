@@ -16,6 +16,7 @@ RABBITMQ_HOSTNAME=${POD_NAME}.${SERVICE_NAME}
 until host ${RABBITMQ_HOSTNAME}
 do
   echo "Waiting for ${RABBITMQ_HOSTNAME} to be resolved"
+  sleep 5
 done
 echo ${RABBITMQ_HOSTNAME} resolved!
 

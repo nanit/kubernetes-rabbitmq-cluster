@@ -28,6 +28,8 @@ spec:
           - name: dist-port
             containerPort: 25672
         env: 
+          - name: RABBITMQ_APP_NAME
+            value: {{APP_NAME}}
           - name: RABBITMQ_DEFAULT_USER
             value: {{RABBITMQ_DEFAULT_USER}}
           - name: RABBITMQ_DEFAULT_PASS

@@ -1,6 +1,6 @@
 FROM rabbitmq:3.6.6-management-alpine
 
-RUN apk add --update jq curl bash
+RUN apk add --update jq curl bash bind-tools
 
 ADD rabbitmq_delayed_message_exchange-0.0.1.ez /plugins
 ADD rabbitmq_clusterer-1.0.3.ez  /plugins

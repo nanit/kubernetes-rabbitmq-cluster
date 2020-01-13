@@ -17,7 +17,7 @@ spec:
         resources:
           requests:
             cpu: 300m
-            memory: 5120Mi
+            memory: {{POD_MEMORY_SIZE}}
         ports:
           - name: queue-port
             containerPort: 5672

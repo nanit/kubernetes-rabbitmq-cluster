@@ -21,8 +21,9 @@ It uses [rabbitmq clusterer plugin](https://github.com/rabbitmq/rabbitmq-cluster
 | Name                         | Default Value         | Purpose                                                                  
 |------------------------------|-----------------------|--------------------------------------------------------------------------
 | NAMESPACE                    | default               | Change it if you want to create the RabbitMQ cluster in a custom Kubernetes namespace. If the namespace does not exist in the moment of deployment, it will be created for you.          
-| DOCKER_REPOSITORY            | nanit                 | Change it if you want to build and use custom docker repository          
-| SUDO                         | sudo                  | Should docker commands be prefixed with sudo. Change to "" to omit sudo. 
+| DOCKER_REPOSITORY            | nanit                 | Change it if you want to build and use custom docker repository    
+| POD_MEMORY_REQUEST           | 5120Mi                | 5GB memory allocated per pod by default         
+| SUDO                         | sudo                  | Should docker commands be prefixed with sudo. Change to "" to omit sudo.
 | RBAC                         | FALSE                 | Should create a role/system account and role binding
 | RABBITMQ_REPLICAS            | 3                     | Number of nodes in the cluster                                           
 | RABBITMQ_DEFAULT_USER        | None                  | The default username to access the management console                    

@@ -44,6 +44,8 @@ It uses [rabbitmq clusterer plugin](https://github.com/rabbitmq/rabbitmq-cluster
 ```
 export NAMESPACE=default && \
 export DOCKER_REPOSITORY=nanit && \
+export POD_CPU_REQUEST=300m && \
+export POD_MEMORY_REQUEST=5Gi && \
 export RABBITMQ_REPLICAS=5 && \
 export RABBITMQ_DEFAULT_USER=username && \
 export RABBITMQ_DEFAULT_PASS=password && \

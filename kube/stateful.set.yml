@@ -19,7 +19,7 @@ spec:
         image: {{IMAGE_NAME}}
         resources:
           requests:
-            cpu: 300m
+            cpu: 3500m
             memory: {{POD_MEMORY_REQUEST}}
         ports:
           - name: queue-port

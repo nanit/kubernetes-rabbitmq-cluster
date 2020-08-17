@@ -8,8 +8,7 @@ while true ; do
     echo "RabbitMQ is ready, setting ha policy"
     sleep 5
     rabbitmqctl set_policy ha-all '.*' '{{RABBITMQ_HA_POLICY}}' --apply-to queues || break
-    rabbitmqctl set_policy expiry '.*' '{"expires":1800000}' --apply-to queues || break
-    rabbitmqctl set_operator_policy max-length '.*' '{"max-length":200000}' --apply-to queues || break
+    rabbitmqctl set_policy expiry-and-length '.*' '{"expires":1800000, "max-length":200000}' --apply-to queues || break
     echo "all policies were set successfully"
     break
   fi

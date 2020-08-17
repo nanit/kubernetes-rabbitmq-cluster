@@ -9,7 +9,7 @@ while true ; do
     sleep 5
     rabbitmqctl set_policy ha-all '.*' '{{RABBITMQ_HA_POLICY}}' --apply-to queues || break
     rabbitmqctl set_policy expiry '.*' '{"expires":1800000}' --apply-to queues || break
-    rabbitmqctl set_policy max-length '.*' '{"max-length":200000, "overflow":"drop-head"}' --apply-to queues || break
+    rabbitmqctl set_policy max-length '.*' '{"max-length":200000}' --apply-to queues || break
     echo "all policies were set successfully"
     break
   fi
